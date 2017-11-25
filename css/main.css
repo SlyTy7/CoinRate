@@ -1,3 +1,18 @@
+body {
+	padding-top: 30px;
+}
+
+.rate-container {
+	margin: 0 auto;
+	text-align: center;
+}
+
+h2 span {
+	font-size: 42px;
+}
+
+
+
 .graph-container {
 /*	max-width: 750px;*/
 	margin: 0 auto;
