@@ -31,10 +31,26 @@
 
 	<body>
 		<div class="container">
-			<div>
-				<h1>The Price of BitCoin</h1>
-				<hr>
-				<p>The Current Price of BitCoin is: <span class="usd"></span> / <span class="eur"></span> / <span class="gbp"></span></p>
+
+			<div class="row">
+				<div class="col-4">
+					<div class="rate-container">
+						<h2>$<span id="current-rate"></span></h2>
+						<p>BITCOIN PRICE</p>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="rate-container">
+						<h2>$<span id="rate-change"></span></h2>
+						<p>SINCE LAST MONTH (USD)</p>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="rate-container">
+						<h2><span id="percent-change"></span>%</h2>
+						<p>SINCE LAST MONTH (%)</p>
+					</div>
+				</div>
 			</div>
 			<div class="graph-container">
 				<canvas id="graph" height="400" width="600"></canvas>
