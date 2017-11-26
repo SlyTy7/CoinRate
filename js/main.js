@@ -1,4 +1,4 @@
-function getStats(){
+function getCurrent(){
 	$.getJSON("https://api.coindesk.com/v1/bpi/currentprice.json", function(data){
 		const currentDollars = $("#current-rate");
 		const currentCents = $("#current-cents");
@@ -14,7 +14,9 @@ function getStats(){
 
 	})
 };
-getStats();
+getCurrent();
+//update current price every 30 seconds
+setInterval(getCurrent, 30000);
 
 
 function getHistory(){
@@ -79,7 +81,3 @@ function getHistory(){
 	});
 }
 getHistory();
-
-//update price every 30 seconds
-setTimeout(getStats, 30000);
-setTimeout(getHistory, 30000);
