@@ -1,7 +1,5 @@
-
 function getStats(){
 	$.getJSON("https://api.coindesk.com/v1/bpi/currentprice.json", function(data){
-
 		const currentDollars = $("#current-rate");
 		const currentCents = $("#current-cents");
 
@@ -10,6 +8,7 @@ function getStats(){
 		let justDollars = dollarPrice.slice(0,-5);
 		let justCents = "." + dollarPrice.split(".")[1].slice(0,2);
 
+		//put current price in header stats
 		currentDollars.html(justDollars);
 		currentCents.html(justCents);
 
@@ -18,13 +17,8 @@ function getStats(){
 getStats();
 
 
-
-
-
 function getHistory(){
-
-
-	//get the rate history from last 30 days
+	//get the rate history from last 30 days using the coindesk api
 	$.getJSON('https://api.coindesk.com/v1/bpi/historical/close.json', function(data){
 		//reset dates and rates arrays
 		let dates = [];
@@ -40,6 +34,7 @@ function getHistory(){
 			rates.push(rate);
 		}
 
+		//find the monthly dollar change amount
 		let monthDiff = (rates[rates.length-1] - rates[0]).toString();
 		let dollarDiff = monthDiff.split(".")[0];
 		let centsDiff = "." + monthDiff.split(".")[1].slice(0,2);
