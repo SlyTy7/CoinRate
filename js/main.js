@@ -15,11 +15,9 @@ function getStats(){
 
 	})
 };
-
 getStats();
 
-//update price every 30 seconds
-setTimeout(getStats, 30000)
+
 
 
 
@@ -86,3 +84,7 @@ function getHistory(){
 	});
 }
 getHistory();
+
+//update price every 30 seconds
+setTimeout(getStats, 30000);
+setTimeout(getHistory, 30000);
