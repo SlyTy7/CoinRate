@@ -1,5 +1,16 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	padding-top: 30px;
+}
+
+/* CURRENT RATE HEADER */
+.col-4 {
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .rate-container {
@@ -7,13 +18,23 @@ body {
 	text-align: center;
 }
 
-h2 span {
+.rate-container h2 span {
 	font-size: 42px;
 }
 
+.current-container, .change-container {
+	border-right: solid #212529 1px;
+}
 
 
+/* RATE HISTORY GRAPH */
 .graph-container {
 	max-width: 850px;
 	margin: 0 auto;
+}
+
+/* FOOTER */
+footer {
+	margin-top: 50px;
+	text-align: center;
 }
