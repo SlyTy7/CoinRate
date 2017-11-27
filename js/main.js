@@ -36,28 +36,31 @@ function getHistory(){
 			rates.push(rate);
 		}
 
+		//MONTHLY RATE CHANGE
 		//find the monthly dollar change amount
-		let monthDiff = (rates[rates.length-1] - rates[0]).toString();
-		let dollarDiff = monthDiff.split(".")[0];
-		let centsDiff = "." + monthDiff.split(".")[1].slice(0,2);
-
+		let monthDiff = (rates[rates.length-1] - rates[0]);
+		let dollarDiff = monthDiff.toString().split(".")[0];
+		let centsDiff = "." + monthDiff.toString().split(".")[1].slice(0,2);
 		//add change amount to html
 		$("#rate-change").html(dollarDiff);
 		$("#changed-cents").html(centsDiff);
 
-
-
+		//MONTHLY PERCENTAGE CHANGE
 		//find the monthly percentage change amount
-		let percentDiff = ((rates[0] / rates[rates.length-1]) * 100);
+		let percentDiff = (monthDiff / rates[0]) * 100;
 		//round the percentange to hundreths
 		let formattedDiff = Math.round(percentDiff * 100) / 100;
 		//add percent change to html
 		$("#percent-change").html(formattedDiff);
 
-
-
-
-
+		//add positive or negative sign to rate and percent change
+		if(monthDiff>0){
+			$("#rate-header").prepend("+");
+			$("#percent-header").prepend("+");
+		}else if(monthDiff<0){
+			$("#rate-header").prepend("-");
+			$("#percent-header").prepend("-");
+		}
 
 		//find minimum value and sets y-axis on chart accordingly
 		let min = Math.floor(Math.min(...rates)) - 100;
