@@ -75,18 +75,22 @@ function getHistory(){
 		            label: 'Rate in USD',
 		            fill: true,
 		            data: rates,
-		            backgroundColor: 'rgba(197, 248, 211, .5)',
-		            borderColor: '#50b767',
-		            borderWidth: 3
+		            backgroundColor: 'rgba(73, 145, 193, .3)',
+		            borderColor: '#3598db',
+		            borderWidth: 3,
 		        }]
 		    },
 		    options: {
 		        scales: {
-		            yAxes: [{
-		                ticks: {
-		                	suggestedMin: min
-		                }
-		            }]
+		            yAxes: [
+			            {
+			            	display: true,
+			            	position: 'left',
+			                ticks: {
+			                	suggestedMin: min
+			                }
+			            }
+		            ]
 		        },
 		        elements: {
 		            line: {
