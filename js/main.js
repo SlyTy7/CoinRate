@@ -55,11 +55,11 @@ function getHistory(){
 
 		//add positive or negative sign to rate and percent change
 		if(monthDiff>0){
-			$("#rate-header").prepend("+");
-			$("#percent-header").prepend("+");
+			$("#rate-header").prepend("<span style='color:green'>+</span>");
+			$("#percent-header").prepend("<span style='color:green'>+</span>");
 		}else if(monthDiff<0){
-			$("#rate-header").prepend("-");
-			$("#percent-header").prepend("-");
+			$("#rate-header").prepend("<span style='color:red'>-</span>");
+			$("#percent-header").prepend("<span style='color:red'>-</span>");
 		}
 
 		//find minimum value and sets y-axis on chart accordingly
@@ -92,6 +92,9 @@ function getHistory(){
 		            line: {
 		                tension: 0, // disables bezier curves
 		            }
+		        },
+		        legend: {
+		        	display: false
 		        }
 		    }
 		});
