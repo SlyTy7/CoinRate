@@ -45,10 +45,24 @@ function getHistory(){
 		$("#rate-change").html(dollarDiff);
 		$("#changed-cents").html(centsDiff);
 
+
+
+		//find the monthly percentage change amount
+		let percentDiff = ((rates[0] / rates[rates.length-1]) * 100);
+		//round the percentange to hundreths
+		let formattedDiff = Math.round(percentDiff * 100) / 100;
+		//add percent change to html
+		$("#percent-change").html(formattedDiff);
+
+
+
+
+
+
 		//find minimum value and sets y-axis on chart accordingly
 		let min = Math.floor(Math.min(...rates)) - 100;
 
-		//the chart....maybe
+		//the price history chart
 		let ctx = $("#graph");
 		let myChart = new Chart(ctx, {
 		    type: 'line',
