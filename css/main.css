@@ -3,8 +3,11 @@
 	padding: 0;
 }
 
-body {
-	padding-top: 30px;
+/* HEADER */
+header h1 {
+	text-align: center;
+	margin: 15px auto;
+	font-weight: bold;
 }
 
 /* CURRENT RATE HEADER */
@@ -35,6 +38,10 @@ body {
 
 /* FOOTER */
 footer {
-	margin-top: 50px;
+	margin: 10px auto 5px auto;
 	text-align: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }

@@ -58,11 +58,11 @@ function getHistory(){
 
 		//add positive or negative sign to rate and percent change
 		if(monthDiff>0){
-			$("#rate-header").prepend("<span style='color:green'>+</span>");
-			$("#percent-header").prepend("<span style='color:green'>+</span>");
+			$("#rate-header").prepend("<span class='text-success'>+</span>");
+			$("#percent-header").prepend("<span class='text-success'>+</span>");
 		}else if(monthDiff<0){
-			$("#rate-header").prepend("<span style='color:red'>-</span>");
-			$("#percent-header").prepend("<span style='color:red'>-</span>");
+			$("#rate-header").prepend("<span class='text-danger'>-</span>");
+			$("#percent-header").prepend("<span class='text-danger'>-</span>");
 		}
 
 		//find minimum value and sets y-axis on chart accordingly
