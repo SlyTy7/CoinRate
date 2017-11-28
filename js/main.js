@@ -129,7 +129,13 @@ function getHistory(){
 		            	{
 		            		display: true,
 		            		ticks: {
-		            			fontColor: '#ffffff'
+		            			fontColor: '#ffffff',
+		            			callback: function(value) {
+		            				const months = ['Jan.', 'Feb.', 'Mar.', 'Apr.' ,'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
+		            				value = value.split("-");
+		            				value = months[value[1]-1] + " " + value[2] + ", " + value[0];
+		            				return value;
+		            			}
 		            		}
 		            	}
 		            ]
