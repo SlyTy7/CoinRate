@@ -40,6 +40,9 @@ function getHistory(){
 		//find the monthly dollar change amount
 		let monthDiff = (rates[rates.length-1] - rates[0]);
 		let dollarDiff = monthDiff.toString().split(".")[0];
+		//format dollar amount to add commas
+		dollarDiff = parseInt(dollarDiff).toLocaleString();
+		//cut off extra decimal places
 		let centsDiff = "." + monthDiff.toString().split(".")[1].slice(0,2);
 		//add change amount to html
 		$("#rate-change").html(dollarDiff);
@@ -65,7 +68,7 @@ function getHistory(){
 		//find minimum value and sets y-axis on chart accordingly
 		let min = Math.floor(Math.min(...rates)) - 100;
 
-
+		//plugin I found to add vertical line to chart on hover
 		Chart.defaults.LineWithLine = Chart.defaults.line;
 		Chart.controllers.LineWithLine = Chart.controllers.line.extend({
 		   draw: function(ease) {
@@ -117,7 +120,7 @@ function getHistory(){
 			                	suggestedMin: min,
 			                	fontColor: '#ffffff',
 			                	callback: function(value, index, values) {
-			                        return '$' + value;
+			                        return '$' + value.toLocaleString();
 			                    }
 			                }
 			            }
