@@ -152,6 +152,12 @@ function getHistory(){
 		        	intersect: false,
 		        	mode: 'index',
 		        	displayColors: false,
+		        	callbacks: {
+					    label: function(tooltipItem, data) {
+					    	//convert label to us dollar format
+					        return '$' + tooltipItem.yLabel.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+					    },
+					},
 
 		        }
 		    }
