@@ -11,6 +11,11 @@ header h1 {
 }
 
 /* CURRENT RATE HEADER */
+.rate-row {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
 .col-4 {
 	padding-left: 0;
 	padding-right: 0;
@@ -21,8 +26,33 @@ header h1 {
 	text-align: center;
 }
 
-.rate-container h2 span {
-	font-size: 42px;
+.rate-container h2 {
+	font-size: 32px;
+	display: inline-table;
+}
+
+.rate-container p {
+	font-size: 15px;
+}
+
+@media only screen and (max-width: 576px) {
+	.rate-container h2 {
+		font-size: 20px;
+	}
+
+	.rate-container p {
+		font-size: 10px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.rate-container h2 {
+		font-size: 26px;
+	}
+
+	.rate-container p {
+		font-size: 12px;
+	}
 }
 
 .current-container, .change-container {
