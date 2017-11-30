@@ -32,8 +32,8 @@ header h1 {
 
 /* RATE HISTORY GRAPH */
 .graph-container {
-	max-width: 850px;
-	margin: 0 auto;
+	max-width: 800px;
+	margin: 0 auto 50px auto;
 }
 
 /* FOOTER */
