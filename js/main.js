@@ -112,33 +112,37 @@ function getHistory(){
 		    },
 		    options: {
 		        scales: {
-		            yAxes: [
-			            {
-			            	display: true,
-			            	position: 'left',
-			                ticks: {
-			                	suggestedMin: min,
-			                	fontColor: '#ffffff',
-			                	callback: function(value, index, values) {
-			                        return '$' + value.toLocaleString();
-			                    }
-			                }
-			            }
-		            ],
-		            xAxes: [
-		            	{
-		            		display: true,
-		            		ticks: {
-		            			fontColor: '#ffffff',
-		            			callback: function(value) {
-		            				const months = ['Jan.', 'Feb.', 'Mar.', 'Apr.' ,'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
-		            				value = value.split("-");
-		            				value = months[value[1]-1] + " " + value[2] + ", " + value[0];
-		            				return value;
-		            			}
-		            		}
-		            	}
-		            ]
+		            yAxes: [{
+		            	display: true,
+		            	position: 'left',
+		            	gridLines : {
+		            		display: 'true',
+	            			color: '#555'
+	            		},
+		                ticks: {
+		                	suggestedMin: min,
+		                	fontColor: '#ffffff',
+		                	callback: function(value, index, values) {
+		                        return '$' + value.toLocaleString();
+		                    }
+		                }
+		            }],
+		            xAxes: [{
+	            		display: true,
+	            		gridLines : {
+	            			display: true,
+	            			color: '#555'
+	            		},
+	            		ticks: {
+	            			fontColor: '#ffffff',
+	            			callback: function(value) {
+	            				const months = ['Jan.', 'Feb.', 'Mar.', 'Apr.' ,'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
+	            				value = value.split("-");
+	            				value = months[value[1]-1] + " " + value[2] + ", " + value[0];
+	            				return value;
+	            			}
+	            		}
+		            }]
 		        },
 		        elements: {
 		            line: {
