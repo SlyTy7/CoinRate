@@ -76,27 +76,28 @@ function getHistory(){
 
 		      if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
 		         let activePoint = this.chart.tooltip._active[0],
-		             graph = this.chart.graph,
+		             ctx = this.chart.ctx,
 		             x = activePoint.tooltipPosition().x,
 		             topY = this.chart.scales['y-axis-0'].top,
 		             bottomY = this.chart.scales['y-axis-0'].bottom;
 
 		         // draw line
-		         graph.save();
-		         graph.beginPath();
-		         graph.moveTo(x, topY);
-		         graph.lineTo(x, bottomY);
-		         graph.lineWidth = 2;
-		         graph.strokeStyle = '#ffffff';
-		         graph.stroke();
-		         graph.restore();
+		         ctx.save();
+		         ctx.beginPath();
+		         ctx.moveTo(x, topY);
+		         ctx.lineTo(x, bottomY);
+		         ctx.lineWidth = 2;
+		         ctx.strokeStyle = '#ffffff';
+		         ctx.stroke();
+		         ctx.restore();
 		      }
 		   }
 		});
 
+
 		//the price history chart
-		let graph = $("#graph");
-		let myChart = new Chart(graph, {
+		let ctx = $("#graph");
+		let myChart = new Chart(ctx, {
 		    type: 'LineWithLine',
 		    data: {
 		        labels: dates,
