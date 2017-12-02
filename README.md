@@ -1,4 +1,4 @@
-# Movie Find
+# Coin Rate
 
 Check the current price of BitCoin in USD, and its rate history over the past 30 days.
 
