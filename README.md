@@ -24,6 +24,7 @@ Check the current price of BitCoin in USD, and its rate history over the past 30
 ## To-Do:
 
   * Add different pages to highlight changes over past week and daily changes
+  * Add a 'last updated n minutes ago' subheading
 
 ## Credits
 
