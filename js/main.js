@@ -61,8 +61,18 @@ function getHistory(){
 			$("#rate-header").prepend("<span class='text-success'>+</span>");
 			$("#percent-header").prepend("<span class='text-success'>+</span>");
 		}else if(monthDiff<0){
-			$("#rate-header").prepend("<span class='text-danger'>-</span>");
-			$("#percent-header").prepend("<span class='text-danger'>-</span>");
+			let rateHeader = $("#rate-header")[0].innerText;
+			let percentHeader = $("#percent-header")[0].innerText
+
+			//format to absolute value of difference
+			$("#rate-header").text("$" + rateHeader.substr(2));
+			$("#percent-header").text(percentHeader.substr(1));
+
+			//add red negative symbol
+			$("#rate-header")
+				.prepend("<span class='text-danger'>-</span>");
+			$("#percent-header")
+				.prepend("<span class='text-danger'>-</span>");
 		}
 
 		//find minimum value and sets y-axis on chart accordingly
