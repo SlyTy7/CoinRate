@@ -1,12 +1,12 @@
-function getCurrent(){
-	$.getJSON("https://api.coindesk.com/v1/bpi/currentprice.json", function(data){
+function getCurrent() {
+	$.getJSON("https://api.coindesk.com/v1/bpi/currentprice.json", function (data) {
 		const currentDollars = $("#current-rate");
 		const currentCents = $("#current-cents");
 
 		//save current price of bitcoin
 		let dollarPrice = data.bpi.USD.rate;
-		let justDollars = dollarPrice.slice(0,-5);
-		let justCents = "." + dollarPrice.split(".")[1].slice(0,2);
+		let justDollars = dollarPrice.slice(0, -5);
+		let justCents = "." + dollarPrice.split(".")[1].slice(0, 2);
 
 		//put current price in header stats
 		currentDollars.html(justDollars);
@@ -19,14 +19,14 @@ getCurrent();
 setInterval(getCurrent, 30000);
 
 
-function getHistory(){
+function getHistory() {
 	// CoinDesk API stopped updating historical price as of July 10th, 2022
 	// The request url listed below (api.coindesk.com/v1/....), has been updated
 	// with hardcoded parameters to show the last recorded 30 days of data. This 
 	// is to prevent a blank graph. Will update in the future.
 
 	//get the rate history from last 30 days using the coindesk api
-	$.getJSON('https://api.coindesk.com/v1/bpi/historical/close.json?start=2022-06-09&end=2022-07-10', function(data){
+	$.getJSON('https://api.coindesk.com/v1/bpi/historical/close.json?start=2022-06-09&end=2022-07-10', function (data) {
 		//reset dates and rates arrays
 		let dates = [];
 		let rates = [];
@@ -43,12 +43,12 @@ function getHistory(){
 
 		//MONTHLY RATE CHANGE
 		//find the monthly dollar change amount
-		let monthDiff = (rates[rates.length-1] - rates[0]);
+		let monthDiff = (rates[rates.length - 1] - rates[0]);
 		let dollarDiff = monthDiff.toString().split(".")[0];
 		//format dollar amount to add commas
 		dollarDiff = parseInt(dollarDiff).toLocaleString();
 		//cut off extra decimal places
-		let centsDiff = "." + monthDiff.toString().split(".")[1].slice(0,2);
+		let centsDiff = "." + monthDiff.toString().split(".")[1].slice(0, 2);
 		//add change amount to html
 		$("#rate-change").html(dollarDiff);
 		$("#changed-cents").html(centsDiff);
@@ -62,10 +62,10 @@ function getHistory(){
 		$("#percent-change").html(formattedDiff);
 
 		//add positive or negative sign to rate and percent change
-		if(monthDiff>0){
+		if (monthDiff > 0) {
 			$("#rate-header").prepend("<span class='text-success'>+</span>");
 			$("#percent-header").prepend("<span class='text-success'>+</span>");
-		}else if(monthDiff<0){
+		} else if (monthDiff < 0) {
 			let rateHeader = $("#rate-header")[0].innerText;
 			let percentHeader = $("#percent-header")[0].innerText
 
@@ -86,100 +86,100 @@ function getHistory(){
 		//plugin I found to add vertical line to chart on hover
 		Chart.defaults.LineWithLine = Chart.defaults.line;
 		Chart.controllers.LineWithLine = Chart.controllers.line.extend({
-		   draw: function(ease) {
-		      Chart.controllers.line.prototype.draw.call(this, ease);
+			draw: function (ease) {
+				Chart.controllers.line.prototype.draw.call(this, ease);
 
-		      if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
-		         let activePoint = this.chart.tooltip._active[0],
-		             ctx = this.chart.ctx,
-		             x = activePoint.tooltipPosition().x,
-		             topY = this.chart.scales['y-axis-0'].top,
-		             bottomY = this.chart.scales['y-axis-0'].bottom;
+				if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+					let activePoint = this.chart.tooltip._active[0],
+						ctx = this.chart.ctx,
+						x = activePoint.tooltipPosition().x,
+						topY = this.chart.scales['y-axis-0'].top,
+						bottomY = this.chart.scales['y-axis-0'].bottom;
 
-		         // draw line
-		         ctx.save();
-		         ctx.beginPath();
-		         ctx.moveTo(x, topY);
-		         ctx.lineTo(x, bottomY);
-		         ctx.lineWidth = 2;
-		         ctx.strokeStyle = '#ffffff';
-		         ctx.stroke();
-		         ctx.restore();
-		      }
-		   }
+					// draw line
+					ctx.save();
+					ctx.beginPath();
+					ctx.moveTo(x, topY);
+					ctx.lineTo(x, bottomY);
+					ctx.lineWidth = 2;
+					ctx.strokeStyle = '#ffffff';
+					ctx.stroke();
+					ctx.restore();
+				}
+			}
 		});
 
 
 		//the price history chart
 		let ctx = $("#graph");
 		let myChart = new Chart(ctx, {
-		    type: 'LineWithLine',
-		    data: {
-		        labels: dates,
-		        datasets: [{
-		            label: 'Rate in USD',
-		            fill: true,
-		            data: rates,
-		            backgroundColor: 'rgba(73, 145, 193, .3)',
-		            borderColor: '#3598db',
-		            borderWidth: 3,
-		        }]
-		    },
-		    options: {
-		        scales: {
-		            yAxes: [{
-		            	display: true,
-		            	position: 'left',
-		            	gridLines : {
-		            		display: 'true',
-	            			color: '#555'
-	            		},
-		                ticks: {
-		                	suggestedMin: min,
-		                	fontColor: '#ffffff',
-		                	callback: function(value, index, values) {
-		                        return '$' + value.toLocaleString();
-		                    }
-		                }
-		            }],
-		            xAxes: [{
-	            		display: true,
-	            		gridLines : {
-	            			display: true,
-	            			color: '#555'
-	            		},
-	            		ticks: {
-	            			fontColor: '#ffffff',
-	            			callback: function(value) {
-	            				const months = ['Jan.', 'Feb.', 'Mar.', 'Apr.' ,'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
-	            				value = value.split("-");
-	            				value = months[value[1]-1] + " " + value[2] + ", " + value[0];
-	            				return value;
-	            			}
-	            		}
-		            }]
-		        },
-		        elements: {
-		            line: {
-		                tension: 0, // disables bezier curves
-		            }
-		        },
-		        legend: {
-		        	display: false
-		        },
-		        tooltips: {
-		        	intersect: false,
-		        	mode: 'index',
-		        	displayColors: false,
-		        	callbacks: {
-					    label: function(tooltipItem, data) {
-					    	//convert label to us dollar format
-					        return '$' + tooltipItem.yLabel.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-					    },
+			type: 'LineWithLine',
+			data: {
+				labels: dates,
+				datasets: [{
+					label: 'Rate in USD',
+					fill: true,
+					data: rates,
+					backgroundColor: 'rgba(73, 145, 193, .3)',
+					borderColor: '#3598db',
+					borderWidth: 3,
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						display: true,
+						position: 'left',
+						gridLines: {
+							display: 'true',
+							color: '#555'
+						},
+						ticks: {
+							suggestedMin: min,
+							fontColor: '#ffffff',
+							callback: function (value, index, values) {
+								return '$' + value.toLocaleString();
+							}
+						}
+					}],
+					xAxes: [{
+						display: true,
+						gridLines: {
+							display: true,
+							color: '#555'
+						},
+						ticks: {
+							fontColor: '#ffffff',
+							callback: function (value) {
+								const months = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
+								value = value.split("-");
+								value = months[value[1] - 1] + " " + value[2] + ", " + value[0];
+								return value;
+							}
+						}
+					}]
+				},
+				elements: {
+					line: {
+						tension: 0, // disables bezier curves
+					}
+				},
+				legend: {
+					display: false
+				},
+				tooltips: {
+					intersect: false,
+					mode: 'index',
+					displayColors: false,
+					callbacks: {
+						label: function (tooltipItem, data) {
+							//convert label to us dollar format
+							return '$' + tooltipItem.yLabel.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+						},
 					},
 
-		        }
-		    }
+				}
+			}
 		});
 	});
 }
