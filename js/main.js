@@ -20,8 +20,13 @@ setInterval(getCurrent, 30000);
 
 
 function getHistory(){
+	// CoinDesk API stopped updating historical price as of July 10th, 2022
+	// The request url listed below (api.coindesk.com/v1/....), has been updated
+	// with hardcoded parameters to show the last recorded 30 days of data. This 
+	// is to prevent a blank graph. Will update in the future.
+
 	//get the rate history from last 30 days using the coindesk api
-	$.getJSON('https://api.coindesk.com/v1/bpi/historical/close.json', function(data){
+	$.getJSON('https://api.coindesk.com/v1/bpi/historical/close.json?start=2022-06-09&end=2022-07-10', function(data){
 		//reset dates and rates arrays
 		let dates = [];
 		let rates = [];
